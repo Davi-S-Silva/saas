@@ -6,9 +6,10 @@ php artisan key:generate
 php artisan migrate
 
 # sudo systemctl apache2 restart
-sudo /etc/init.d/apache2 restart
 
-cd /var/www/html
-npm cache clean --force
-sudo npm install
+# cd /var/www/html
+# npm cache clean --force
+# sudo npm install
 sudo npm run build
+
+sudo /etc/init.d/apache2 restart
