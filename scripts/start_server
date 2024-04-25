@@ -8,4 +8,3 @@ php artisan migrate
 # sudo systemctl apache2 restart
 sudo /etc/init.d/apache2 restart
 
-npm run build
