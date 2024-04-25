@@ -8,5 +8,5 @@ php artisan migrate
 # sudo systemctl apache2 restart
 sudo /etc/init.d/apache2 restart
 
-npm install
-npm run build
+cd /var/www/html
+sudo npm run build
