@@ -12,7 +12,3 @@ php artisan migrate
 # sudo npm install
 
 sudo /etc/init.d/apache2 restart
-
-sudo npm install
-
-sudo npm run build
