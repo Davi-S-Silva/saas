@@ -37,7 +37,7 @@ class ContactController extends Controller
             'message'=>'teste de envio '
         ]));
 
-        dd('email enviado!');
+        // dd('email enviado!');
     }
 
     /**
