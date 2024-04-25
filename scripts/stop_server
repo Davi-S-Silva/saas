@@ -1,0 +1,10 @@
+#!/bin/bash
+isExistApp=`pgrep apache2`
+
+
+if [[ -n  $isExistApp ]]; then
+    cd /var/www/html
+    sudo rm -r *
+    sudo systemctl stop apache2
+fi
+

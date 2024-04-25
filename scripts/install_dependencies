@@ -1,0 +1,73 @@
+#!/bin/bash
+# export PHP_VERSION ="php8.2"
+sudo apt update && apt upgrade
+# remove php
+# sudo add-apt-repository ppa:ondrej/php -r -y
+# sudo apt remove --autoremove php* libapache2-mod-php* php*
+sudo apt install -y apache2
+# sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:ondrej/php
+sudo apt update
+sudo apt install php8.2
+sudo apt-get install -y php8.2-mysql php8.2-zip 
+sudo apt-get install -y php8.2-gd php8.2-mbstring php8.2-xml php8.2-gd
+# sudo apt install curl
+sudo apt-get install -y php8.2-curl
+# sudo apt install -y php8.3 
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+sudo mv composer.phar /usr/local/bin/composer
+
+sudo apt update
+sudo apt-get install -y nodejs
+sudo apt install -y npm
+sudo apt-get install -y curl
+# apt install git-crypt
+# apt-get install haveged rng-tools
+# gpg --gen-key
+
+
+export CONFIG_FILE_NAME="app.conf"
+
+export WEBSITE_DIR="/var/www/html"
+
+export SERVER_ADMIN="saasportalweb@gmail.com"
+
+
+# export SERVER_NAME=http://saasportal.com.br
+export SERVER_NAME=$(wget -qO- ifconfig.me/ip)
+
+# export SERVER_ALIAS=http://www.saasportal.com.br
+export SERVER_ALIAS=$(wget -qO- ifconfig.me/ip)
+
+sudo systemctl start apache2
+cd /etc/apache2/sites-available
+
+# sudo cp 000-default.conf app.conf
+sudo rm -r /etc/apache2/sites-available/app.conf
+sudo touch app.conf
+sudo chmod 666 app.conf
+
+echo "<VirtualHost *:80>" >> $CONFIG_FILE_NAME
+echo "  ServerAdmin $SERVER_ADMIN" >> $CONFIG_FILE_NAME
+echo "  ServerName http://$SERVER_NAME/" >> $CONFIG_FILE_NAME
+echo "  ServerAlias http://$SERVER_ALIAS/" >> $CONFIG_FILE_NAME
+echo "  DocumentRoot $WEBSITE_DIR/public" >> $CONFIG_FILE_NAME
+echo "  <Directory $WEBSITE_DIR>" >> $CONFIG_FILE_NAME
+echo "    Require all granted" >> $CONFIG_FILE_NAME
+echo "    AllowOverride All" >> $CONFIG_FILE_NAME
+echo "    Options Indexes Multiviews FollowSymLinks" >> $CONFIG_FILE_NAME
+echo "  </Directory>" >> $CONFIG_FILE_NAME
+echo "</VirtualHost>" >> $CONFIG_FILE_NAME
+
+sudo a2dissite 000-default.conf
+sudo a2ensite app.conf
+sudo a2enmod rewrite
+
+
+
+
+
+

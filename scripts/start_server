@@ -1,0 +1,14 @@
+#!/bin/bash
+cd /var/www/html
+sudo composer install 
+# sudo composer update
+php artisan key:generate
+php artisan migrate
+
+# sudo systemctl apache2 restart
+sudo /etc/init.d/apache2 restart
+<<<<<<< HEAD
+npm install
+npm run dev
+=======
+>>>>>>> 978699c41d4393b52bb1c924944700a44138f0f5
