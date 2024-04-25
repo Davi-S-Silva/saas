@@ -29,10 +29,7 @@ class Contact extends Mailable
     {
         return new Envelope(
             from: new Address($this->data['fromMail'],$this->data['fromName']),
-            subject: $this->data['subject'],
-            replyTo:[
-                new Address($this->data['fromMail'],$this->data['fromName']),
-            ]
+            subject: $this->data['subject']
         );
     }
 
