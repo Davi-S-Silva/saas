@@ -9,5 +9,6 @@ php artisan migrate
 sudo /etc/init.d/apache2 restart
 
 cd /var/www/html
+npm cache clean --force
 sudo npm install
 sudo npm run build
